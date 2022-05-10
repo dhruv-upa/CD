@@ -102,10 +102,28 @@ def infix_to_prefix(formula):
 
     return exp_stack[-1]
 
+### THREE ADDRESS CODE GENERATION ###
+def generate3AC(pos):
+	print("### THREE ADDRESS CODE GENERATION ###")
+	exp_stack = []
+	t = 1
+	
+	for i in pos:
+		if i not in OPERATORS:
+			exp_stack.append(i)
+		else:
+			print(f't{t} := {exp_stack[-2]} {i} {exp_stack[-1]}')
+			exp_stack=exp_stack[:-2]
+			exp_stack.append(f't{t}')
+			t+=1
+
+
 expres = input("INPUT THE EXPRESSION: ")
 
 pre = infix_to_prefix(expres)
 
 pos = infix_to_postfix(expres)
+
+generate3AC(pos)
 
 #Input a+b-c
